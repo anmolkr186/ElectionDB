@@ -1,0 +1,220 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Election</title>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- styles -->
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    </body>
+
+    <script type="text/javascript">
+        // Prevent dropdown menu from closing when click inside the form
+        $(document).on("click", ".navbar-right .dropdown-menu", function (e) {
+            e.stopPropagation();
+        });
+    </script>
+</head>
+
+<body style="font-family:'Lato';">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-fixed-top">
+        <div class="navbar-header d-flex col">
+            <a class="navbar-brand" href="#">Election Database</a>
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
+                class="navbar-toggle navbar-toggler ml-auto">
+                <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <!-- <ul class="nav navbar-nav">
+            </ul> -->
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item" style="margin-right: 20px;"><a href="#" class="nav-link">Contact</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1" href="#"
+                        id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong>Menu</strong>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item"><strong>Register</strong></a>
+                        <a href="#" class="dropdown-item"><strong>Profile</strong></a>
+                        <a href="#" class="dropdown-item"><strong>Options</strong></a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-divider"></div>
+                            <input type="submit" class="btn btn-danger btn-block" value="Sign out">
+
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="container-fluid nav" style="padding: 5px; display: flex;flex-direction: column;">
+            <h2>Admin Dashboard</h2>
+            <h4>Hey {{username}}! You are now logged in </h4>
+
+        </div>
+    </div>
+
+    <div class="container" style="margin:auto; display: flex;flex-wrap: wrap;  align-content: center; ">
+
+
+        <div class="card border-primary mb-3" style="max-width: 18rem;height:13rem;margin: 20px;">
+            <div class="card-body text-primary">
+                <h5 class="card-title">View Voters Details</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt.</p>
+                <!----This the type of query required-->
+                <form action="queryprocess" method="post">
+                    {% csrf_token %}
+                    <input name="vote" value="1" type="hidden">
+                    <input name="username" value="{{ username }}" type="hidden">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 18rem;height:13rem;margin: 20px;">
+            <div class="card-body text-primary">
+                <h5 class="card-title">Check Vote Count</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt.</p>
+                <form action="queryprocess" method="post">
+                    {% csrf_token %}
+                    <input name="vote" value="2" type="hidden">
+                    <input name="username" value="{{ username }}" type="hidden">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 18rem;height:13rem;margin: 20px;">
+            <div class="card-body text-primary">
+                <h5 class="card-title">Add officials</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt.</p>
+                <!-- <input name="vote" value="3" type="hidden">
+                    <input name="username" value="{{ username }}" type="hidden" > -->
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class="btn btn-primary" href="#collapse1">Proceed</a>
+                            </h4>
+                        </div>
+
+                        <div id="collapse1" class="panel-collapse collapse"
+                            style="padding:50px;border-radius:30px; background-color: rgb(234, 246, 255);width:400px;height:200px">
+                            <div class="panel-body">
+                                <h4>Enter Officer Details</h4>
+                                <form action="queryprocess" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" name="officerid" class="form-control"
+                                            placeholder="Enter Officer ID">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="name"class="form-control" placeholder="Enter Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="category" class="form-control" placeholder="Enter Category">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="bn"class="form-control" placeholder="Enter Booth Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="add"class="form-control" placeholder="Enter Address">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="contact" class="form-control" placeholder="Enter Contact Number">
+                                    </div>
+                                    <input name="vote" value="3" type="hidden">
+                                    <input name="username" value="{{ username }}" type="hidden">
+                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 18rem;height:13rem;margin: 20px;">
+            <div class="card-body text-primary">
+                <h5 class="card-title">View All officials</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt.</p>
+                <form action="queryprocess" method="post">
+                    {% csrf_token %}
+                    <input name="vote" value="4" type="hidden">
+                    <input name="username" value="{{ username }}" type="hidden">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 18rem;height:13rem;margin: 20px;">
+            <div class="card-body text-primary">
+                <h5 class="card-title">View Candidate Details</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt. </p>
+                <form action="queryprocess" method="post">
+                    {% csrf_token %}
+                    <input name="vote" value="5" type="hidden">
+                    <input name="username" value="{{ username }}" type="hidden">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,493 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Election</title>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- styles -->
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet" type="text/css">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    </body>
+
+    <script type="text/javascript">
+        // Prevent dropdown menu from closing when click inside the form
+        $(document).on("click", ".navbar-right .dropdown-menu", function (e) {
+            e.stopPropagation();
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script>
+        var append_increment = 0;
+        setInterval(function () {
+            $.ajax({
+                type: "GET",
+                url: 'updater',
+            })
+                .done(function (response) {
+                    console.log(response["name"]);
+                    var ctx = document.getElementById('myChart1');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: response["val1"],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: response["data1"],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    ctx = document.getElementById('myChart2');
+                    myChart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: response["val2"],
+                            datasets: [{
+                                label: '# of Employees',
+                                data: response["data2"],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    ctx = document.getElementById('myChart3');
+                    myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: response["val3"],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: response["data3"],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                });
+        }, 10000);
+    </script>
+
+</head>
+
+<body style="font-family:'Lato';">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-fixed-top">
+        <div class="navbar-header d-flex col">
+            <a class="navbar-brand" href="#">Election Database</a>
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
+                class="navbar-toggle navbar-toggler ml-auto">
+                <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div>
+            {% for me in messages %}
+            <div class="alert alert-danger" style="color: #f44336;" role="alert">
+                {{me}}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <!-- <ul class="nav navbar-nav">
+                
+            </ul> -->
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item" style="margin-right: 20px;"><a href="#" class="nav-link">Contact</a></li>
+                <a href="votinglogin" class="btn btn-primary" style="margin-right:10px">Voter Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
+                        style="margin-right:10px">Admin Login</a>
+                    <ul class="dropdown-menu form-wrapper">
+                        <li>
+                            <form action="login" method="post">
+                                {% csrf_token %}
+                                <p class="hint-text">Please enter your details</p>
+                                <div class="form-group">
+                                    <input type="text" name="username" class="form-control" placeholder="Username"
+                                        required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Password"
+                                        required="required">
+                                </div>
+                                {% comment %} <div class="form-group">
+                                    <label class="checkbox-inline"><input type="checkbox" required="required"> Remember
+                                        Me</a></label>
+                                </div> {% endcomment %}
+                                <input type="submit" class="btn btn-primary btn-block" value="Sign In">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- content -->
+
+    <div class="row" style="margin: 50px 20px 50px 20px;">
+
+        <div class="col-sm-6">
+            <div class="col-sm-12" id="sticky-sidebar">
+
+                <div class="container" style="display: inline;">
+                    <h4>Graph View</h4>
+                    <br>
+                    <!-- Nav pills -->
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link button-primary active" data-toggle="pill" href="#view1">View 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fade" data-toggle="pill" href="#view2">View 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fade" data-toggle="pill" href="#view3">View 3</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="view1">
+                        <div class="abc">
+                            <canvas id="myChart1" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart1');
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: {{ val1 }},
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: {{ data1 }},
+                                    backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                    borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                    borderWidth: 1
+                                        }]
+                                    },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                                });
+                            </script>
+                        </div>
+    
+                    </div>
+                    <div class="tab-pane container fade" id="view2">
+                        <div class="abc">
+
+                            <canvas id="myChart2" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart2');
+                                var myChart = new Chart(ctx, {
+                                    type: 'radar',
+                                    data: {
+                                        labels: ['Assistant', 'Clerk', 'Engineer', 'Inspector', 'Nurse', 'Post officer', 'Superintedant', 'Teacher'],
+                                        datasets: [{
+                                            label: '# of Votes',
+                                            data: [13, 14, 13, 11, 19, 2, 11, 12],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="tab-pane container fade" id="view3">
+                        <div class="abc">
+
+                            <canvas id="myChart3" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart3');
+                                var myChart = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Buddhist', 'Christian', 'Hindu', 'Jain', 'Muslim', 'Sikh'],
+                                        datasets: [{
+                                            label: '# of Votes',
+                                            data: [1, 11, 27, 7, 12, 12],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="container" style="background-color: red; width:500px"> -->
+
+
+                <!-- </div> -->
+
+
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+
+            <!-- <h4> Analyse this chart for better understanding</h4> -->
+            <!-- 
+            <div class="btn-group" style="margin-top: 20px;">
+                <button type="button" class="btn btn-outline-primary nav-link active" data-toggle="pill" href="#right1">Partywise</button>
+                <button type="button" class="btn btn-outline-primary nav-link fade" data-toggle="pill" href="#right2">Regionwise</button>
+                <button type="button" class="btn btn-outline-primary nav-link fade" data-toggle="pill" href="#right3">Candidatewise</button>
+            </div>
+                        -->
+            <div class="container" style="display: inline;">
+                <br>
+                <!-- Nav pills -->
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#right1">Research and Motivation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#right2">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#right3">Technologies Used</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane container active" id="right1">
+                    <p>
+                        Our initial brainstorming made it clear that there were not many services present which store
+                        and present election data
+                        to the general public and even news outlets. With this project, we wanted to bridge that gap by
+                        providing information
+                        like Party Transactions and Advanced Voter Demographics which are neither reported on any news
+                        outlet nor are stored by
+                        current databases.
+
+                        Current Databases like http://www.indiavotes.com although provide post-election results like
+                        voter turnout and close
+                        contests, fail to provide any information which might help predict elections. On top of that
+                        there is no information
+                        about election workers or EVMs. We believe that this data is critical in the smooth functioning
+                        of elections and have
+                        made sure to include it in our project. We hope that our project will help to create
+                        well-informed elections in the
+                        times to come and by using our project everyone is able to better analyse their choices.
+
+                    </p>
+                </div>
+
+                <div class="tab-pane container fade" id="right2">
+                    <p>
+                        We have created an Indian Election Database System which stores the information about the
+                        elections, voter, election
+                        commision, candidates and political parties.Through our site a user can have access to all the
+                        data they need.
+
+                        Assumption: We have access to all the data about the parties and election.
+
+                        Our major stakeholders will be Voters, Political Parties, Media Outlets and Independent
+                        Researchers.
+
+                    </p>
+
+
+                </div>
+
+                <div class="tab-pane container fade" id="right3">
+                    <p>He have used Django Framework, JS, Ajax, and Bootstrap</p>
+                </div>
+                <!-- <form action="tabledata" method="get">
+                    <input name="choice" value="1" type="hidden">    
+                </form> -->
+
+
+            </div>
+        </div>
+
+</body>
+</body>
+
+</html>

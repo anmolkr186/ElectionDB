@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Election</title>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- styles -->
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    </body>
+
+    <script type="text/javascript">
+        // Prevent dropdown menu from closing when click inside the form
+        $(document).on("click", ".navbar-right .dropdown-menu", function (e) {
+            e.stopPropagation();
+        });
+    </script>
+</head>
+
+<body style="font-family:'Lato';">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-fixed-top">
+        <div class="navbar-header d-flex col">
+            <a class="navbar-brand" href="#">Election Database</a>
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
+                class="navbar-toggle navbar-toggler ml-auto">
+                <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <!-- <ul class="nav navbar-nav">
+                
+            </ul> -->
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item" style="margin-right: 20px;"><a href="#" class="nav-link">Contact</a></li>
+
+                <li class="nav-item">
+                    <a href="#" data-toggle="dropdown"
+                        class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Login</a>
+                    <ul class="dropdown-menu form-wrapper">
+                        <li>
+                            <form action="/examples/actions/confirmation.php" method="post">
+                                <p class="hint-text">Please enter your details</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password"
+                                        required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-inline"><input type="checkbox" required="required"> Remember
+                                        Me</a></label>
+                                </div>
+                                <input type="submit" class="btn btn-primary btn-block" value="Sign In">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- content -->
+
+    <div class="row" style="margin: 50px 20px 50px 20px;">
+
+        <div class="col-sm-6">
+            <div class="col-sm-12" id="sticky-sidebar">
+
+                <div class="container" style="display: inline;">
+                    <h4>Statewise Votes</h4>
+                    <br>
+                    <!-- Nav pills -->
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#view1">View 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#view2">View 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#view3">View 3</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="view1">
+                        <div class="abc">
+                            <canvas id="myChart1" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart1');
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                        datasets: [{
+                                            label: '# of Votes',
+                                            data: [12, 19, 3, 5, 2, 3],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane container fade" id="view2">
+                        <div class="abc">
+
+                            <canvas id="myChart2" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart2');
+                                var myChart = new Chart(ctx, {
+                                    type: 'radar',
+                                    data: {
+                                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                        datasets: [{
+                                            label: '# of Votes',
+                                            data: [12, 19, 3, 5, 2, 3],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="tab-pane container fade" id="view3">
+                        <div class="abc">
+
+                            <canvas id="myChart3" height="200px"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart3');
+                                var myChart = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                        datasets: [{
+                                            label: '# of Votes',
+                                            data: [12, 19, 3, 5, 2, 3],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="container" style="background-color: red; width:500px"> -->
+
+
+                <!-- </div> -->
+
+
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h1>Content here </h1>
+
+            <h4> Analyse this chart for better understanding</h4>
+
+            <div class="btn-group" style="margin-top: 20px;">
+                <button type="button" class="btn btn-outline-primary">Option 1</button>
+                <button type="button" class="btn btn-outline-danger">Option 2</button>
+                <button type="button" class="btn btn-outline-success">Option 3</button>
+
+            </div>
+            <h4 style="margin-top: 20px;">I Scroll</h4>
+            <p>Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing
+                brunch. Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag
+                wolf squid tote bag. Tote bag cronut semiotics,
+                raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean shorts
+                paleo. Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics
+                ugh synth chillwave meditation.
+                Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella
+                DIY 90's blog.</p>
+
+            <p>Ethical Kickstarter PBR asymmetrical lo-fi. oreamcatcher street art Carles, stumptown gluten-free
+                Kickstarter artisan Wes Anderson wolf pug. Godard sustainable you probably haven't heard of them, vegan
+                farm-to-table Williamsburg slow-carb
+                readymade disrupt deep v. Meggings seitan Wes Anderson semiotics, cliche American Apparel whatever.
+                Helvetica cray plaid, vegan brunch Banksy leggings +1 direct trade. Wayfarers codeply PBR selfies. Banh
+                mi McSweeney's Shoreditch selfies,
+                forage fingerstache food truck occupy YOLO Pitchfork fixie iPhone fanny pack art party Portland.</p>
+
+            <p>Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing
+                brunch. Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag
+                wolf squid tote bag. Tote bag cronut semiotics,
+                raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean shorts
+                paleo. Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics
+                ugh synth chillwave meditation.
+                Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella
+                DIY 90's blog.</p>
+
+            <p>Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing
+                brunch. Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag
+                wolf squid tote bag. Tote bag cronut semiotics,
+                raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean shorts
+                paleo. Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics
+                ugh synth chillwave meditation.
+                Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella
+                DIY 90's blog.</p>
+
+            <p>Ethical Kickstarter PBR asymmetrical lo-fi. oreamcatcher street art Carles, stumptown gluten-free
+                Kickstarter artisan Wes Anderson wolf pug. Godard sustainable you probably haven't heard of them, vegan
+                farm-to-table Williamsburg slow-carb
+                readymade disrupt deep v. Meggings seitan Wes Anderson semiotics, cliche American Apparel whatever.
+                Helvetica cray plaid, vegan brunch Banksy leggings +1 direct trade. Wayfarers codeply PBR selfies. Banh
+                mi McSweeney's Shoreditch selfies,
+                forage fingerstache food truck occupy YOLO Pitchfork fixie iPhone fanny pack art party Portland.</p>
+
+            <p>Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing
+                brunch. Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag
+                wolf squid tote bag. Tote bag cronut semiotics,
+                raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean shorts
+                paleo. Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics
+                ugh synth chillwave meditation.
+                Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella
+                DIY 90's blog.</p>
+            
+        </div>
+    </div>
+
+    <div class="footer container-fluid" style="background-color: rgb(230, 230, 230);height: 400px; ">
+        <div class="row">
+            <h1>Footer</h1>
+        </div>
+
+    </div>
+
+</body>
+</body>
+
+</html>

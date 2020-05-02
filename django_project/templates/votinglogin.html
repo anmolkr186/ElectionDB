@@ -1,0 +1,137 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Election</title>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- styles -->
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet" type="text/css">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    </body>
+
+    <script type="text/javascript">
+        // Prevent dropdown menu from closing when click inside the form
+        $(document).on("click", ".navbar-right .dropdown-menu", function (e) {
+            e.stopPropagation();
+        });
+    </script>
+</head>
+
+<body style="font-family:'Lato';">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-fixed-top">
+        <div class="navbar-header d-flex col">
+            <a class="navbar-brand" href="#">Election Database</a>
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
+                class="navbar-toggle navbar-toggler ml-auto">
+                <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div>
+            {% for me in messages %}
+            <div class="alert alert-danger" style="color: #f44336;" role="alert">
+                {{me}}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <!-- <ul class="nav navbar-nav">
+                
+            </ul> -->
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item" style="margin-right: 20px;"><a href="#" class="nav-link">Contact</a></li>
+                <li class ="nav-item"> 
+                    <a href="votinglogin" class="btn btn-primary" style="margin-right:10px">Voter Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="dropdown"
+                        class="btn btn-primary dropdown-toggle" style="margin-right:10px">Admin Login</a>
+                    <ul class="dropdown-menu form-wrapper">
+                        <li>
+                            <form action="login" method="post">
+                                {% csrf_token %}
+                                <p class="hint-text">Please enter your details</p>
+                                <div class="form-group">
+                                    <input type="text" name="username" class="form-control" placeholder="Username"
+                                        required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Password"
+                                        required="required">
+                                </div>
+                                {% comment %} <div class="form-group">
+                                    <label class="checkbox-inline"><input type="checkbox" required="required"> Remember
+                                        Me</a></label>
+                                </div> {% endcomment %}
+                                <input type="submit" class="btn btn-primary btn-block" value="Sign In">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- <h1>voter login page</h1> -->
+
+    <div class="jumbotron" style="border-radius: 30px; border-width: 2px ;width: 500px;margin: auto; margin-top:100px;padding-left: 50px;padding-right: 50px;">
+    <h2>Login Form</h2>
+
+    <form action="voterdashboard" method="post">
+        {% csrf_token %}
+        <p class="hint-text">Please enter your details</p>
+        <div class="form-group">
+            <input type="text" name="voter_username" class="form-control" placeholder="Username"
+                required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" name="voter_password" class="form-control" placeholder="Password"
+                required="required">
+        </div>
+        <!-- {% comment %} <div class="form-group">s
+            <label class="checkbox-inline"><input type="checkbox" required="required"> Remember
+                Me</a></label>
+        </div> {% endcomment %} -->
+        <input type="submit" class="btn btn-primary btn-block" value="Continue">
+    </form>
+</div>
+</body>
+    </html>
