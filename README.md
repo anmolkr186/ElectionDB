@@ -62,7 +62,7 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 
-- Click on the address which is highlighted bold. The project would then open in the browser.
+- Open the localhost link. The project would then open in the browser.
 
 ## Bonus Implementation
 We have created a virtual election which allows us to estimate the election result before the actual result. A user logs in to our site and chooses the candidate, once he is done he is not allowed to vote again.  This way we create a table with the voter details and his vote and after some specific time, we declare the estimated results to our users.
