@@ -1,5 +1,5 @@
 # ElectionDB
-[https://lh4.googleusercontent.com/jkbEafhNHg2m7GT6aipbi6Gq-mULU751ZKgEYhiVteUZyHOJW1Y_G8eJwGKL1TXoYXk86b7mpwnj1dZgfRZb3CxgawdTLtdBGiiyyo0DLOElxkoXmolMZpkA1gOBm6izz5miHjyr](https://lh4.googleusercontent.com/jkbEafhNHg2m7GT6aipbi6Gq-mULU751ZKgEYhiVteUZyHOJW1Y_G8eJwGKL1TXoYXk86b7mpwnj1dZgfRZb3CxgawdTLtdBGiiyyo0DLOElxkoXmolMZpkA1gOBm6izz5miHjyr)
+[https://lh4.googleusercontent.com/jkbEafhNHg2m7GT6aipbi6Gq-mULU751ZKgEYhiVteUZyHOJW1Y_G8eJwGKL1TXoYXk86b7mpwnj1dZgfRZb3CxgawdTLtdBGiiyyo0DLOElxkoXmolMZpkA1gOBm6izz5miHjyr]
 
 # Research & Motivation
 Our initial brainstorming made it clear that there were not many services present which store and present election data to the general public and even news outlets. With this project, we wanted to bridge that gap by providing information like Party Transactions and Advanced Voter  Demographics which are neither reported on any news outlet nor are stored by current databases.
