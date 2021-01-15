@@ -1,12 +1,11 @@
 # ElectionDB
-[https://lh4.googleusercontent.com/jkbEafhNHg2m7GT6aipbi6Gq-mULU751ZKgEYhiVteUZyHOJW1Y_G8eJwGKL1TXoYXk86b7mpwnj1dZgfRZb3CxgawdTLtdBGiiyyo0DLOElxkoXmolMZpkA1gOBm6izz5miHjyr]
 
-# Research & Motivation
+## Research & Motivation
 Our initial brainstorming made it clear that there were not many services present which store and present election data to the general public and even news outlets. With this project, we wanted to bridge that gap by providing information like Party Transactions and Advanced Voter  Demographics which are neither reported on any news outlet nor are stored by current databases.
 
 Current Databases like [http://www.indiavotes.com](http://www.indiavotes.com/) although provide post-election results like voter turnout and close contests, fail to provide any information which might help predict elections. On top of that there is no information about election workers or EVMs. We believe that this data is critical in the smooth functioning of elections and have made sure to include it in our project. We hope that our project will help to create well-informed elections in the times to come and by using our project everyone is able to better analyse their choices.
 
-# Overview
+## Overview
 We have created an Indian Election Database System which stores the information about the elections, voter, election commission, candidates, and political parties. Through our site, a user can have access to all the data they need.
 
 Assumption: We have access to all the data about the parties and election.
@@ -18,7 +17,7 @@ Our major stakeholders will be Voters, Political Parties, Media Outlets and Inde
 - For Media Outlets and Independent Researchers, you can combine both the voter's and party's data to analyze why a political party was able to win a particular district. Also, by further analyzing the data you could give better insight into voting trends. Party expenditure and candidate history data can also be useful for these agencies/individuals.
 - For the Election Commision, Records of all the officers involved in the election process will allow for easier administration and will also streamline the allotment process of officers to each district. Also, EVM information will be useful to find and replace defective machines
 
-# Technical Design
+## Technical Design
 ### Backend
 
 We decided to use the Django Framework in our app as it is a python-based web framework and follows the model-template-view architectural pattern which makes it highly scalable.
@@ -42,7 +41,7 @@ We have created a Table for each stakeholder to store their details and few tabl
 
 The database is published in the Microsoft Azure Servers and could be accessed using the Microsoft SQL Server Management Software.
 
-# Documentation
+## Documentation
 The user has to do the following to run this project:
 
 - Since this project is implemented in Django Framework, the user has to install Django in his machine and then go to the project directory *DBMS_PROJECT/django_project*
@@ -65,7 +64,7 @@ Quit the server with CTRL-BREAK.
 
 - Click on the address which is highlighted bold. The project would then open in the browser.
 
-## Bonus Part
+## Bonus Implementation
 We have created a virtual election which allows us to estimate the election result before the actual result. A user logs in to our site and chooses the candidate, once he is done he is not allowed to vote again.  This way we create a table with the voter details and his vote and after some specific time, we declare the estimated results to our users.
 
 This way we provide our user the result before the actual votes start counting.
@@ -75,7 +74,6 @@ We made a highly efficient service that keeps the track of transactions, maintai
 We made highly efficient web pages which allow the user to keep on getting the updated data without even refreshing the web page. Details are mentioned in the technical design.
 
 ## ER diagram
-
 Link: [https://app.creately.com/diagram/knHC7u2yS86/](https://app.creately.com/diagram/knHC7u2yS86/)
 
 ## Co-Contributors
